@@ -1,6 +1,6 @@
 # universe_iterator - creates every possible black and white image
 
-This script generates every possible black and white image. Everything is represented among these images - your facebook photo, Avatar movie (as frames), the Bible, or even the picture of the very moment you reading this description.
+This script generates every possible black and white image. Everything is represented among these images - your facebook photo, Avatar movie (as frames), the Bible, or even the picture of the very moment you read this description.
 
 Using default values, there are about (2^1000) possible images. Some of them are just rotations. Therefore, we can roughly estimate that there are (2^1000)/4 unique images.
 
