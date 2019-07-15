@@ -2,7 +2,7 @@
 
 This script generates every possible black and white image. Everything is represented among these images - your facebook photo, Avatar movie (as frames), the Bible, or even the picture of the very moment you reading this description.
 
-Using default values, there is about $2^1000$ possible images. Some of them are just rotations. Therefore, we can roughly estimate that there are $2^1000/4$ unique images.
+Using default values, there is about (2^1000) possible images. Some of them are just rotations. Therefore, we can roughly estimate that there are (2^1000)/4 unique images.
 
 ## Requirements
 
