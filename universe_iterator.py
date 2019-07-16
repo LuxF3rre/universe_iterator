@@ -18,12 +18,13 @@ def dec_to_bin(x):
 
 
 # Take given variation of image (1, 2, 3, ...), translate it
-# into binary, make a list of it, and fill the rest with zeros. 
+# into binary, make a list of it, and fill the rest with zeros.
 # Note: Our variation is put at the end of the number grid.
+
 
 def variations(x, size):
     variation = dec_to_bin(x)
-    variation_list = list(map(int, variation))  # rewrite str to a list 
+    variation_list = list(map(int, variation))  # rewrite str to a list
     to_be_filled = size - len(variation_list)
     number_grid = np.concatenate([np.array(variation_list), np.zeros(to_be_filled, dtype=int)])
     return number_grid
@@ -35,8 +36,8 @@ def variations(x, size):
 def number_to_color(numbers, x, y):
     if numbers[x, y] == 0:
         return (0, 0, 0)
-    else:
-        return (255, 255, 255)
+    return (255, 255, 255)
+
 
 order = random.randrange(2 ** (side * side) - 1)  # select random variation
 variation = variations(order, size)  # create given variation
