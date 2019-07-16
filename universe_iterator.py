@@ -4,8 +4,8 @@ import random
 import numpy as np
 from PIL import Image
 
-side = 100  # define the image's side in pixels
-size = side ** 2  # calculate how many pixels are in the image
+SIDE = 100  # define the image's side in pixels
+SIZE = SIDE ** 2  # calculate how many pixels are in the image
 
 
 # Transform a dec number to a bin number
@@ -22,7 +22,7 @@ def dec_to_bin(x):
 # Note: Our variation is put at the end of the number grid.
 
 
-def variations(x, size):
+def get_variations(x, size):
     variation = dec_to_bin(x)
     variation_list = list(map(int, variation))  # rewrite str to a list
     to_be_filled = size - len(variation_list)
@@ -39,11 +39,11 @@ def number_to_color(numbers, x, y):
     return (255, 255, 255)
 
 
-order = random.randrange(2 ** (side * side) - 1)  # select random variation
-variation = variations(order, size)  # create given variation
-shaped_variation = variation.reshape(side, side)  # create a side x side grid
+order = random.randrange(2 ** SIZE - 1)  # select random variation
+variation = get_variations(order, SIZE)  # create given variation
+shaped_variation = variation.reshape(SIDE, SIDE)  # create a SIDE x SIDE grid
 
-img = Image.new('RGB', (side, side), "black")  # create new image
+img = Image.new('RGB', (SIDE, SIDE), "black")  # create new image
 pixels = img.load()  # load its pixels
 
 
