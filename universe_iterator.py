@@ -13,8 +13,8 @@ SIZE = SIDE ** 2  # calculate how many pixels are in the image
 # Note: Returns a string.
 
 
-def dec_to_bin(x):
-    return bin(x)[2:]
+def dec_to_bin(dec_number):
+    return bin(dec_number)[2:]
 
 
 # Take given variation of image (1, 2, 3, ...), translate it
@@ -22,36 +22,37 @@ def dec_to_bin(x):
 # Note: Our variation is put at the end of the number grid.
 
 
-def get_variations(x, size):
-    variation = dec_to_bin(x)
-    variation_list = list(map(int, variation))  # rewrite str to a list
-    to_be_filled = size - len(variation_list)
-    number_grid = np.concatenate([np.array(variation_list), np.zeros(to_be_filled, dtype=int)])
+def get_number_grid(variation_number, size_of_grid):
+    number = dec_to_bin(variation_number)
+    digits_list = list(map(int, number))  # rewrite str to a list
+    to_be_filled = size_of_grid - len(digits_list)
+    number_grid = np.concatenate(
+        [np.array(digits_list), np.zeros(to_be_filled, dtype=int)])
     return number_grid
 
 
 #  Assign colour black for 0 in the grid, and colour white for 1 in the grid.
 
 
-def number_to_color(numbers, x, y):
-    if numbers[x, y] == 0:
+def number_to_color(shaped_grid, x_axis, y_axis):
+    if shaped_grid[x_axis, y_axis] == 0:
         return (0, 0, 0)
     return (255, 255, 255)
 
 
-order = random.randrange(2 ** SIZE - 1)  # select random variation
-variation = get_variations(order, SIZE)  # create given variation
-shaped_variation = variation.reshape(SIDE, SIDE)  # create a SIDE x SIDE grid
+ORDER = random.randrange(2 ** SIZE - 1)  # select random variation
+NUMBER_GRID = get_number_grid(ORDER, SIZE)  # create given variation
+SHAPED_GRID = NUMBER_GRID.reshape(SIDE, SIDE)  # create a SIDE x SIDE grid
 
-img = Image.new('RGB', (SIDE, SIDE), "black")  # create new image
-pixels = img.load()  # load its pixels
+IMG = Image.new('RGB', (SIDE, SIDE), "black")  # create new image
+PIXELS = IMG.load()  # load its pixels
 
 
 #  Assign colour for every pixel.
 
 
-for i in range(img.size[0]):
-    for j in range(img.size[1]):
-        pixels[i, j] = number_to_color(shaped_variation, i, j)
+for x in range(IMG.size[0]):
+    for y in range(IMG.size[1]):
+        PIXELS[x, y] = number_to_color(SHAPED_GRID, x, y)
 
-img.show()  # show the image
+IMG.show()  # show the image
