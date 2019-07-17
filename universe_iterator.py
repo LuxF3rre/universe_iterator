@@ -20,9 +20,7 @@ Attributes:
     SIZE (int): Holds the number of pixels in desired image.
     ORDER ():
     NUMBER_LIST ():
-    UMBER_GRID ():
-    IMG ():
-    PIXELS ():
+    NUMBER_GRID ():
 
 Todo:
     * Finish writing the docs.
@@ -38,9 +36,6 @@ import random
 from PIL import Image
 
 import numpy as np
-
-SIDE = 100
-SIZE = SIDE ** 2
 
 
 def dec_to_bin(dec_number: int) -> str:
@@ -116,9 +111,11 @@ def assign_colour(image: Image, number_grid: np.array) -> Image:
     for x in range(image.size[0]):
         for y in range(image.size[1]):
             pixels[x, y] = number_to_colour(number_grid, x, y)
-
     return image
 
+
+SIDE = 100
+SIZE = SIDE ** 2
 
 ORDER = random.randrange(2 ** SIZE - 1)  # select random variation
 NUMBER_LIST = create_digits_list(ORDER, SIZE)
