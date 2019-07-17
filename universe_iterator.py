@@ -90,11 +90,11 @@ def number_to_color(number_grid: np.array, x_axis: int, y_axis: int) -> tuple(in
 
 
 ORDER = random.randrange(2 ** SIZE - 1)  # select random variation
-NUMBER_LIST = create_digits_list(ORDER, SIZE)  # create given variation
-NUMBER_GRID = NUMBER_LIST.reshape(SIDE, SIDE)  # create a SIDE x SIDE grid
+NUMBER_LIST = create_digits_list(ORDER, SIZE)
+NUMBER_GRID = NUMBER_LIST.reshape(SIDE, SIDE)
 
-IMG = Image.new('RGB', (SIDE, SIDE), "black")  # create new image
-PIXELS = IMG.load()  # load its pixels
+IMG = Image.new('RGB', (SIDE, SIDE), "black")
+PIXELS = IMG.load()
 
 
 #  Assign colour for every pixel.
@@ -104,4 +104,4 @@ for x in range(IMG.size[0]):
     for y in range(IMG.size[1]):
         PIXELS[x, y] = number_to_color(NUMBER_GRID, x, y)
 
-IMG.show()  # show the image
+IMG.show()
