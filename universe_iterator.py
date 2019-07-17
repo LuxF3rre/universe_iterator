@@ -86,9 +86,9 @@ def create_digits_list(variation_number: int, size_of_image: int) -> np.array:
 #  Assign colour black for 0 in the grid, and colour white for 1 in the grid.
 
 
-def number_to_color(number_grid: np.array, x_axis: int,
-                    y_axis: int) -> tuple(int):
-    """
+def number_to_colour(number_grid: np.array, x_axis: int,
+                     y_axis: int) -> tuple(int):
+    """Assign colour to number.
 
     Args:
         number_grid:
@@ -103,19 +103,28 @@ def number_to_color(number_grid: np.array, x_axis: int,
     return (255, 255, 255)
 
 
+def assign_colour(image: Image, number_grid: np.array) -> Image:
+    """Assign colour for every pixel.
+
+    Args:
+
+    Returns:
+
+    """
+    pixels = image.load()
+
+    for x in range(image.size[0]):
+        for y in range(image.size[1]):
+            pixels[x, y] = number_to_colour(number_grid, x, y)
+
+    return image
+
+
 ORDER = random.randrange(2 ** SIZE - 1)  # select random variation
 NUMBER_LIST = create_digits_list(ORDER, SIZE)
 NUMBER_GRID = NUMBER_LIST.reshape(SIDE, SIDE)
 
 IMG = Image.new('RGB', (SIDE, SIDE), "black")
-PIXELS = IMG.load()
-
-
-#  Assign colour for every pixel.
-
-
-for x in range(IMG.size[0]):
-    for y in range(IMG.size[1]):
-        PIXELS[x, y] = number_to_color(NUMBER_GRID, x, y)
+IMG = assign_colour(IMG, NUMBER_GRID)
 
 IMG.show()
