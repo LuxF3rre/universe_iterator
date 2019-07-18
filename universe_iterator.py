@@ -31,18 +31,12 @@ Todo:
 
 """
 
-import sys
-import getopt
+import argparse
 import random
 
 from PIL import Image
 
 import numpy as np
-
-
-def print_usage():
-    """Print usage"""
-    print("Usage")
 
 
 def dec_to_bin(dec_number: int) -> str:
@@ -80,7 +74,7 @@ def create_digits_list(variation_number: int, size_of_image: int) -> np.array:
 
     """
     number = dec_to_bin(variation_number)
-    digits_list = list(map(int, number))  # rewrite str to a list
+    digits_list = list(map(int, number))  # rewrite str to a list(int)
     to_be_filled = size_of_image - len(digits_list)
     number_list = np.concatenate(
         [np.array(digits_list), np.zeros(to_be_filled, dtype=int)])
@@ -118,29 +112,20 @@ def assign_colour(image: Image, number_grid: np.array) -> Image:
 
     for x_pointer in range(image.size[0]):
         for y_pointer in range(image.size[1]):
-            pixels[x_pointer, y_pointer] = number_to_colour(number_grid[x_pointer, y_pointer])
+            pixels[x_pointer, y_pointer] = number_to_colour(
+                number_grid[x_pointer, y_pointer])
     return image
+
+
+# Defaults
 
 
 SIDE = 100
 SIZE = SIDE ** 2
 ORDER = random.randrange(2 ** SIZE - 1)  # select random variation
 
+PARSER = argparse.ArgumentParser(description='Process some integers.')
 
-try:
-    OPTS, ARGS = getopt.getopt(sys.argv, "s:v:h", ["side=", "variation=", "help"])
-except getopt.GetoptError:
-    print_usage()
-    sys.exit(2)
-for opt, arg in OPTS:
-    if opt in ("-s", "--side"):
-        SIDE = arg
-        SIZE = SIDE ** 2
-    elif opt in ("", ""):
-        ORDER = arg
-    elif opt in ("-h", "--help"):
-        print_usage()
-        sys.exit()
 
 NUMBER_LIST = create_digits_list(ORDER, SIZE)
 NUMBER_GRID = NUMBER_LIST.reshape(SIDE, SIDE)
