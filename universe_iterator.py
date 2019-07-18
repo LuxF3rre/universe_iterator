@@ -33,6 +33,7 @@ Todo:
 
 import argparse
 import random
+from typing import typing
 
 from PIL import Image
 
@@ -84,7 +85,7 @@ def create_digits_list(variation_number: int, size_of_image: int) -> np.array:
 #  Assign colour black for 0 in the grid, and colour white for 1 in the grid.
 
 
-def number_to_colour(digit_in_grid: int) -> tuple(int):
+def number_to_colour(digit_in_grid: int) -> typing.Tuple[int, int, int]:
     """Assign colour to number.
 
     Args:
