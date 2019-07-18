@@ -33,7 +33,7 @@ Todo:
 
 import argparse
 import random
-from typing import typing
+from typing import Tuple
 
 from PIL import Image
 
