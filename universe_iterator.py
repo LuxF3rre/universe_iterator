@@ -18,24 +18,31 @@ Attributes:
         holding the length of the side, therefore produced image can
         only be a square.
     SIZE (int): Holds the number of pixels in desired image.
-    ORDER ():
-    NUMBER_LIST ():
-    NUMBER_GRID ():
+    ORDER (int):
+    NUMBER_LIST (np.array):
+    NUMBER_GRID (np.array):
+    IMG (Image):
 
 Todo:
     * Finish writing the docs.
-    * Remove the "line too long" warnings from pylint and pycodestyle.
 
 .. _Google Python Style Guide:
    http://google.github.io/styleguide/pyguide.html
 
 """
 
+import sys
+import getopt
 import random
 
 from PIL import Image
 
 import numpy as np
+
+
+def print_usage():
+    """Print usage"""
+    print("Usage")
 
 
 def dec_to_bin(dec_number: int) -> str:
@@ -67,7 +74,9 @@ def create_digits_list(variation_number: int, size_of_image: int) -> np.array:
         size_of_image: The number of pixels in the image.
 
     Returns:
-
+        A one dimensional np.array containing digits 0 and 1 that represent
+        pixels in image. This array needs to be shaped in order to create
+        image.
 
     """
     number = dec_to_bin(variation_number)
@@ -81,19 +90,18 @@ def create_digits_list(variation_number: int, size_of_image: int) -> np.array:
 #  Assign colour black for 0 in the grid, and colour white for 1 in the grid.
 
 
-def number_to_colour(number_grid: np.array, x_axis: int,
-                     y_axis: int) -> tuple(int):
+def number_to_colour(digit_in_grid: int) -> tuple(int):
     """Assign colour to number.
 
     Args:
-        number_grid:
-        x_axis:
-        y_axis:
+        digit_in_grid: A digit in number grid that will represent pixel.
 
     Returns:
+        A tuple that holds the RGB colour, either black (for 0)
+        or white (for 1).
 
     """
-    if number_grid[x_axis, y_axis] == 0:
+    if digit_in_grid == 0:
         return (0, 0, 0)
     return (255, 255, 255)
 
@@ -108,16 +116,32 @@ def assign_colour(image: Image, number_grid: np.array) -> Image:
     """
     pixels = image.load()
 
-    for x in range(image.size[0]):
-        for y in range(image.size[1]):
-            pixels[x, y] = number_to_colour(number_grid, x, y)
+    for x_pointer in range(image.size[0]):
+        for y_pointer in range(image.size[1]):
+            pixels[x_pointer, y_pointer] = number_to_colour(number_grid[x_pointer, y_pointer])
     return image
 
 
 SIDE = 100
 SIZE = SIDE ** 2
-
 ORDER = random.randrange(2 ** SIZE - 1)  # select random variation
+
+
+try:
+    OPTS, ARGS = getopt.getopt(sys.argv, "s:v:h", ["side=", "variation=", "help"])
+except getopt.GetoptError:
+    print_usage()
+    sys.exit(2)
+for opt, arg in OPTS:
+    if opt in ("-s", "--side"):
+        SIDE = arg
+        SIZE = SIDE ** 2
+    elif opt in ("", ""):
+        ORDER = arg
+    elif opt in ("-h", "--help"):
+        print_usage()
+        sys.exit()
+
 NUMBER_LIST = create_digits_list(ORDER, SIZE)
 NUMBER_GRID = NUMBER_LIST.reshape(SIDE, SIDE)
 
