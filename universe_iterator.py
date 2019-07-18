@@ -124,7 +124,8 @@ SIDE = 100
 SIZE = SIDE ** 2
 ORDER = random.randrange(2 ** SIZE - 1)  # select random variation
 
-PARSER = argparse.ArgumentParser(description='Process some integers.')
+PARSER = argparse.ArgumentParser(
+    description='Create every possible black and white image.')
 
 
 NUMBER_LIST = create_digits_list(ORDER, SIZE)
