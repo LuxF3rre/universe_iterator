@@ -21,7 +21,7 @@ Attributes:
     ORDER (int):
     NUMBER_LIST (np.array):
     NUMBER_GRID (np.array):
-    IMG (Image):
+    IMG (PIL.Image):
 
 Todo:
     * Finish writing the docs.
@@ -73,7 +73,7 @@ def create_digits_list(variation_number: int, size_of_image: int) -> np.array:
     Returns:
         A one dimensional np.array containing digits 0 and 1 that represent
         pixels in the image. This array needs to be shaped in order to create
-        image.
+        the image.
 
     """
     number = dec_to_bin(variation_number)
@@ -91,10 +91,10 @@ def number_to_colour(digit_in_grid: int) -> Tuple[int, int, int]:
     """Assign colour to number.
 
     Args:
-        digit_in_grid: A digit in number grid that will represent pixel.
+        digit_in_grid: A digit in number grid that will represent a pixel.
 
     Returns:
-        A tuple that holds the RGB colour, either black (for 0)
+        A tuple that holds the colour in RGB, either black (for 0)
         or white (for 1).
 
     """
@@ -103,13 +103,15 @@ def number_to_colour(digit_in_grid: int) -> Tuple[int, int, int]:
     return (255, 255, 255)
 
 
-def assign_colour(image: Image, number_grid: np.array) -> Image:
+def assign_colour(image: PIL.Image, number_grid: np.array) -> PIL.Image:
     """Assign colour for every pixel.
 
     Args:
+        image:
+        number_grid:
 
     Returns:
-
+        An image
     """
     pixels = image.load()
 
