@@ -153,7 +153,7 @@ def iterate_universe(image_side: int, ordinal_number: int) -> None:
 
     if ordinal_number > (2 ** image_size - 1):
         click.echo(
-            'The ordinal number for side {} cannot be largner than {}'.format(
+            'The ordinal number for side {} cannot be larger than {}'.format(
                 image_side, (2 ** image_size - 1)))
         sys.exit()
 
