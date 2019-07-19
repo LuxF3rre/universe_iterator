@@ -25,7 +25,6 @@ Attributes:
 
 Todo:
     * Finish writing the docs.
-    * Add cli.
     * Save mechanism.
 
 .. _Google Python Style Guide:
@@ -33,7 +32,6 @@ Todo:
 
 """
 
-import random
 from typing import Tuple
 
 import click
@@ -123,21 +121,38 @@ def assign_colour(image: PIL.Image, number_grid: np.array) -> PIL.Image:
 
 
 @click.command()
-def iterate_universe():
+@click.option(
+    '-i',
+    '--image_side',
+    default=100,
+    show_default=True,
+    required=True,
+    type=int,
+    help='the side of an image')
+@click.option(
+    '-o',
+    '--ordinal_number',
+    required=True,
+    multiple=True,
+    type=int,
+    help='select variation of an image')
+def iterate_universe(image_side: int, ordinal_number: int) -> None:
     """
+    Args:
+
+    Returns:
+        Nothing.
 
     """
-    SIDE = 100
-    SIZE = SIDE ** 2
-    ORDER = random.randrange(2 ** SIZE - 1)  # select random variation
+    image_size = image_side ** 2
 
-    NUMBER_LIST = create_digits_list(ORDER, SIZE)
-    NUMBER_GRID = NUMBER_LIST.reshape(SIDE, SIDE)
+    number_list = create_digits_list(ordinal_number, image_size)
+    number_grid = number_list.reshape(image_side, image_side)
 
-    IMG = Image.new('RGB', (SIDE, SIDE), "black")
-    IMG = assign_colour(IMG, NUMBER_GRID)
+    universe_variation = Image.new('RGB', (image_side, image_side), "black")
+    universe_variation = assign_colour(universe_variation, number_grid)
 
-    IMG.show()
+    universe_variation.show()
 
 
 if __name__ == '__main__':
