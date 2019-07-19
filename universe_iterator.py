@@ -122,17 +122,23 @@ def assign_colour(image: PIL.Image, number_grid: np.array) -> PIL.Image:
     return image
 
 
-# Defaults
+@click.command()
+def iterate_universe():
+    """
+
+    """
+    SIDE = 100
+    SIZE = SIDE ** 2
+    ORDER = random.randrange(2 ** SIZE - 1)  # select random variation
+
+    NUMBER_LIST = create_digits_list(ORDER, SIZE)
+    NUMBER_GRID = NUMBER_LIST.reshape(SIDE, SIDE)
+
+    IMG = Image.new('RGB', (SIDE, SIDE), "black")
+    IMG = assign_colour(IMG, NUMBER_GRID)
+
+    IMG.show()
 
 
-SIDE = 100
-SIZE = SIDE ** 2
-ORDER = random.randrange(2 ** SIZE - 1)  # select random variation
-
-NUMBER_LIST = create_digits_list(ORDER, SIZE)
-NUMBER_GRID = NUMBER_LIST.reshape(SIDE, SIDE)
-
-IMG = Image.new('RGB', (SIDE, SIDE), "black")
-IMG = assign_colour(IMG, NUMBER_GRID)
-
-IMG.show()
+if __name__ == '__main__':
+    iterate_universe()
