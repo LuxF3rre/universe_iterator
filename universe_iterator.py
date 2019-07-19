@@ -111,15 +111,15 @@ def assign_colour(image: Image, number_grid: np.array) -> Image:
         the numbers from the number_list.
 
     Returns:
-        An coloured image.
+        A coloured image.
 
     """
     pixels = image.load()
 
-    for x_pointer in range(image.size[0]):
-        for y_pointer in range(image.size[1]):
-            pixels[x_pointer, y_pointer] = number_to_colour(
-                number_grid[x_pointer, y_pointer])
+    for x in range(image.size[0]):
+        for y in range(image.size[1]):
+            pixels[x, y] = number_to_colour(
+                number_grid[x, y])
     return image
 
 
@@ -139,7 +139,7 @@ def assign_colour(image: Image, number_grid: np.array) -> Image:
     multiple=True,
     type=int,
     help='select variation of an image')
-def iterate_universe(image_side: int, ordinal_number: int) -> None:
+def main(image_side: int, ordinal_number: int) -> None:
     """.
 
     Args:
@@ -172,4 +172,4 @@ def iterate_universe(image_side: int, ordinal_number: int) -> None:
 
 
 if __name__ == '__main__':
-    iterate_universe()
+    main()
