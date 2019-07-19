@@ -25,6 +25,8 @@ Attributes:
 
 Todo:
     * Finish writing the docs.
+    * Add cli.
+    * Save mechanism.
 
 .. _Google Python Style Guide:
    http://google.github.io/styleguide/pyguide.html
