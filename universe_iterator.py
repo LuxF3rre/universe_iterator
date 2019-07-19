@@ -15,8 +15,6 @@ Example:
     $ python universe_iterator.py
 
 Todo:
-    * Finish writing the docs.
-    * Save mechanism.
     * Update usage.
 
 .. _Google Python Style Guide:
@@ -25,11 +23,12 @@ Todo:
 """
 
 import sys
+from pathlib import Path
 from typing import Tuple
 
-import click
-
 from PIL import Image
+
+import click
 
 import numpy as np
 
@@ -154,7 +153,9 @@ def main(image_side: int, ordinal_number: int) -> None:
     universe_iteration = Image.new('RGB', (image_side, image_side), "black")
     universe_iteration = assign_colour(universe_iteration, number_grid)
 
-    universe_iteration.show()
+    working_dir = Path(__file__).resolve().parent
+
+    universe_iteration.save('{}\\{}.png'.format(working_dir, ordinal_number), 'PNG')
 
 
 if __name__ == '__main__':
