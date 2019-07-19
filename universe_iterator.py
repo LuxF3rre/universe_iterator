@@ -31,10 +31,10 @@ Todo:
 
 """
 
-import argparse
 import random
 from typing import Tuple
 
+import click
 from PIL import Image
 
 import numpy as np
@@ -85,7 +85,7 @@ def create_digits_list(variation_number: int, size_of_image: int) -> np.array:
 #  Assign colour black for 0 in the grid, and colour white for 1 in the grid.
 
 
-def number_to_colour(digit_in_grid: int) -> typing.Tuple[int, int, int]:
+def number_to_colour(digit_in_grid: int) -> Tuple[int, int, int]:
     """Assign colour to number.
 
     Args:
@@ -124,10 +124,6 @@ def assign_colour(image: Image, number_grid: np.array) -> Image:
 SIDE = 100
 SIZE = SIDE ** 2
 ORDER = random.randrange(2 ** SIZE - 1)  # select random variation
-
-PARSER = argparse.ArgumentParser(
-    description='Create every possible black and white image.')
-
 
 NUMBER_LIST = create_digits_list(ORDER, SIZE)
 NUMBER_GRID = NUMBER_LIST.reshape(SIDE, SIDE)
