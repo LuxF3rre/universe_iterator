@@ -14,16 +14,6 @@ that there are about (2^1000) / 4 unique images.
 Example:
     $ python universe_iterator.py
 
-Attributes:
-    image_side (int): Holds the image side length in pixels.
-    image_size (int): Holds the number of pixels in desired image.
-    ordinal_number (int): The ordinal number of variation of an image.
-    number_list (np.array): Containins digits 0 and 1 that represent pixels
-        in the image.
-    number_grid (np.array): Is the reshaped side x side array
-        containing the numbers from the number_list.
-    universe_iteration (Image):
-
 Todo:
     * Finish writing the docs.
     * Save mechanism.
@@ -45,25 +35,20 @@ import numpy as np
 
 
 def dec_to_bin(dec_number: int) -> str:
-    """Transform a dec number into a bin number.
+    """Transform a decimal number into a binary number.
 
     Args:
         dec_number: Decimal number to be translated into binary one.
 
     Returns:
-        A binary number as a string. Before returning the value, transformed
-        number is stripped form two zeros at the beggining.
+        A binary number as a string.
 
     """
     return bin(dec_number)[2:]
 
 
 def create_digits_list(ordinal_number: int, image_size: int) -> np.array:
-    """Create a digits list of an image variation.
-
-    This function takes the ordinal number of given variation of image
-    (e.g. 1, 2, 3), translates it into binary, makes a list of digits of it,
-    and fills the rest of the list with zeros up to the size of the image.
+    """Create a digits list of an image variation from ordinal number.
 
     Args:
         ordinal_number: The ordinal number of variation of an image.
@@ -73,9 +58,7 @@ def create_digits_list(ordinal_number: int, image_size: int) -> np.array:
         size_of_image: The number of pixels in the image.
 
     Returns:
-        A one dimensional np.array containing digits 0 and 1 that represent
-        pixels in the image. This array needs to be shaped in order to create
-        the image.
+        A one dimensional np.array that represent pixels in the image.
 
     """
     number = dec_to_bin(ordinal_number)
@@ -87,14 +70,13 @@ def create_digits_list(ordinal_number: int, image_size: int) -> np.array:
 
 
 def number_to_colour(digit_in_grid: int) -> Tuple[int, int, int]:
-    """Assign colour black for 0 in the grid, and colour white for 1 in the grid.
+    """Return colour for given number.
 
     Args:
         digit_in_grid: A digit in number grid that will represent a pixel.
 
     Returns:
-        A tuple that holds the colour in RGB, either black (for 0)
-        or white (for 1).
+        A tuple that holds the colour in RGB.
 
     """
     if digit_in_grid == 0:
@@ -106,9 +88,8 @@ def assign_colour(image: Image, number_grid: np.array) -> Image:
     """Assign colour for every pixel.
 
     Args:
-        image:
-        number_grid: Is the reshaped side x side array containing
-        the numbers from the number_list.
+        image: Image to be coloured.
+        number_grid: Holds the reshaped array of digits.
 
     Returns:
         A coloured image.
@@ -131,36 +112,40 @@ def assign_colour(image: Image, number_grid: np.array) -> Image:
     show_default=True,
     required=True,
     type=int,
-    help='the side of an image')
+    help='the length of the side of the image')
 @click.option(
     '-o',
     '--ordinal_number',
     required=True,
     multiple=True,
     type=int,
-    help='select variation of an image')
+    help='ordinal number of variation of the image')
 def main(image_side: int, ordinal_number: int) -> None:
-    """.
+    """Create iteration of an image.
 
     Args:
-        image_side:
-        ordinal_number:
+        image_side: desired length of side in pixels.
+        ordinal_number: ordinal number of desired variation of an image.
 
     Returns:
         Nothing.
 
     """
+    # Check if passed options are correct or sane.
+
     if image_side > 1000:
-        click.echo("The image's side cannot be larger than 1 000 px")
+        click.echo("Error: The image's side cannot be larger than 1 000 px.")
         sys.exit()
 
     image_size = image_side ** 2
 
     if ordinal_number > (2 ** image_size - 1):
         click.echo(
-            'The ordinal number for side {} cannot be larger than {}'.format(
+            'Error: The ordinal number for side {} cannot be larger than {}'.format(
                 image_side, (2 ** image_size - 1)))
         sys.exit()
+
+    # Create the image and show it.
 
     number_list = create_digits_list(ordinal_number, image_size)
     number_grid = number_list.reshape(image_side, image_side)
