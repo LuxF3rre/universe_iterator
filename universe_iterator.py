@@ -155,7 +155,11 @@ def main(image_side: int, ordinal_number: int) -> None:
 
     working_dir = Path(__file__).resolve().parent
 
-    universe_iteration.save('{}\\{}.png'.format(working_dir, ordinal_number), 'PNG')
+    universe_iteration.save(
+        '{}\\{}.png'.format(
+            working_dir,
+            ordinal_number),
+        'PNG')
 
 
 if __name__ == '__main__':
