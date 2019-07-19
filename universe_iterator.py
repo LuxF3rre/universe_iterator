@@ -59,25 +59,25 @@ def dec_to_bin(dec_number: int) -> str:
 def create_digits_list(variation_number: int, size_of_image: int) -> np.array:
     """Create a digits list of an image variation.
 
-    This function takes the number of given variation of image (1, 2, 3, ...),
-    translates it into binary, makes a list of digits of it, and fills
-    the rest of the list with zeros up to the size of the image.
+    This function takes the ordinal number of given variation of image
+    (e.g. 1, 2, 3), translates it into binary, makes a list of digits of it,
+    and fills the rest of the list with zeros up to the size of the image.
 
     Args:
-        variation_number: The ordered number of variation of an image.
-            E.g. images made of only 0 is the first variation;
+        variation_number: The ordinal number of variation of an image.
+            E.g. image made of only 0 is the first variation;
             image made of 0 and 1 at the end is the second variation;
             image made of 0 and 10 at the end is the third variation.
         size_of_image: The number of pixels in the image.
 
     Returns:
         A one dimensional np.array containing digits 0 and 1 that represent
-        pixels in image. This array needs to be shaped in order to create
+        pixels in the image. This array needs to be shaped in order to create
         image.
 
     """
     number = dec_to_bin(variation_number)
-    digits_list = list(map(int, number))  # rewrite str to a list(int)
+    digits_list = list(map(int, number))  # rewrite str to a list[int]
     to_be_filled = size_of_image - len(digits_list)
     number_list = np.concatenate(
         [np.array(digits_list), np.zeros(to_be_filled, dtype=int)])
