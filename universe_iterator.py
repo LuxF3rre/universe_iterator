@@ -14,14 +14,14 @@ Example:
     $ python universe_iterator.py
 
 Attributes:
-    SIDE (int): Holds the image side length in pixels. There is only one
+    image_side (int): Holds the image side length in pixels. There is only one
         constant holding the length of the side, therefore produced image can
         only be a square.
-    SIZE (int): Holds the number of pixels in desired image.
-    ORDER (int):
-    NUMBER_LIST (np.array):
-    NUMBER_GRID (np.array):
-    IMG (PIL.Image):
+    image_size (int): Holds the number of pixels in desired image.
+    ordinal_number (int):
+    number_list (np.array):
+    number_grid (np.array):
+    universe_iteration (PIL.Image):
 
 Todo:
     * Finish writing the docs.
@@ -35,8 +35,9 @@ Todo:
 import sys
 from typing import Tuple
 
-import click
 from PIL import Image
+
+import click
 
 import numpy as np
 
@@ -102,7 +103,7 @@ def number_to_colour(digit_in_grid: int) -> Tuple[int, int, int]:
     return (255, 255, 255)
 
 
-def assign_colour(image: PIL.Image, number_grid: np.array) -> PIL.Image:
+def assign_colour(image: Image, number_grid: np.array) -> Image:
     """Assign colour for every pixel.
 
     Args:
@@ -111,6 +112,7 @@ def assign_colour(image: PIL.Image, number_grid: np.array) -> PIL.Image:
 
     Returns:
         An image
+
     """
     pixels = image.load()
 
@@ -138,7 +140,8 @@ def assign_colour(image: PIL.Image, number_grid: np.array) -> PIL.Image:
     type=int,
     help='select variation of an image')
 def iterate_universe(image_side: int, ordinal_number: int) -> None:
-    """
+    """.
+
     Args:
 
     Returns:
@@ -160,10 +163,10 @@ def iterate_universe(image_side: int, ordinal_number: int) -> None:
     number_list = create_digits_list(ordinal_number, image_size)
     number_grid = number_list.reshape(image_side, image_side)
 
-    universe_variation = Image.new('RGB', (image_side, image_side), "black")
-    universe_variation = assign_colour(universe_variation, number_grid)
+    universe_iteration = Image.new('RGB', (image_side, image_side), "black")
+    universe_iteration = assign_colour(universe_iteration, number_grid)
 
-    universe_variation.show()
+    universe_iteration.show()
 
 
 if __name__ == '__main__':
