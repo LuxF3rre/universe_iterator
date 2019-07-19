@@ -27,9 +27,9 @@ Todo:
 import sys
 from typing import Tuple
 
-from PIL import Image
-
 import click
+
+from PIL import Image
 
 import numpy as np
 
@@ -141,7 +141,8 @@ def main(image_side: int, ordinal_number: int) -> None:
 
     if ordinal_number > (2 ** image_size - 1):
         click.echo(
-            'Error: The ordinal number for side {} cannot be larger than {}'.format(
+            'Error: The ordinal number for side {}'
+            'cannot be larger than {}'.format(
                 image_side, (2 ** image_size - 1)))
         sys.exit()
 
