@@ -14,8 +14,8 @@ Example:
     $ python universe_iterator.py
 
 Attributes:
-    SIDE (int): Holds the image side length. There is only one constant
-        holding the length of the side, therefore produced image can
+    SIDE (int): Holds the image side length in pixels. There is only one
+        constant holding the length of the side, therefore produced image can
         only be a square.
     SIZE (int): Holds the number of pixels in desired image.
     ORDER (int):
@@ -32,6 +32,7 @@ Todo:
 
 """
 
+import sys
 from typing import Tuple
 
 import click
@@ -144,7 +145,17 @@ def iterate_universe(image_side: int, ordinal_number: int) -> None:
         Nothing.
 
     """
+    if image_side > 1000:
+        click.echo("The image's side cannot be larger than 1 000 px")
+        sys.exit()
+
     image_size = image_side ** 2
+
+    if ordinal_number > (2 ** image_size - 1):
+        click.echo(
+            'The ordinal number for side {} cannot be largner than {}'.format(
+                image_side, (2 ** image_size - 1)))
+        sys.exit()
 
     number_list = create_digits_list(ordinal_number, image_size)
     number_grid = number_list.reshape(image_side, image_side)
