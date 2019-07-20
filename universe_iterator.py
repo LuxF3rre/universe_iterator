@@ -111,14 +111,14 @@ def assign_colour(image: Image, number_grid: np.array) -> Image:
     default=100,
     show_default=True,
     type=int,
-    help='the length of the side of the image')
+    help='the length of the side of the image in pixels >= 1')
 @click.option(
     '-o',
     '--ordinal_numbers',
     required=True,
     multiple=True,
     type=int,
-    help='ordinal numbers of variation of the image')
+    help='ordinal numbers of variation of the image >= 0')
 def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
     """universe_iterator creates every possible black and white image.
 
@@ -136,6 +136,9 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
     if image_side > 1000:
         click.echo("Error: The image's side cannot be larger than 1 000 px.")
         sys.exit()
+    elif image_side <= 0:
+        click.echo("Error: The image's side must be at least 1 px.")
+        sys.exit()
 
     image_size = image_side ** 2
 
@@ -145,6 +148,9 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
                 'Error: The ordinal number for side {}'
                 'cannot be larger than {}'.format(
                     image_side, '{:.2e}'.format((2 ** image_size - 1))))
+            sys.exit()
+        elif ordinal_number < 0:
+            click.echo('Error: The ordinal number must be at least 0.')
             sys.exit()
 
         # Create the image and save it.
