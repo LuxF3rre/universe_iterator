@@ -2,3 +2,4 @@
 .mypy_cache
 .pyre
 monkeytype.sqlite3
+Img.png
