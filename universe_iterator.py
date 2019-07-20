@@ -143,10 +143,10 @@ def main(image_side: int, ordinal_number: int) -> None:
         click.echo(
             'Error: The ordinal number for side {}'
             'cannot be larger than {}'.format(
-                image_side, (2 ** image_size - 1)))
+                image_side, '{:.0e}'.format((2 ** image_size - 1))))
         sys.exit()
 
-    # Create the image and show it.
+    # Create the image and save it.
 
     number_list = create_digits_list(ordinal_number, image_size)
     number_grid = number_list.reshape(image_side, image_side)
