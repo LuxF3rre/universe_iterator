@@ -139,7 +139,7 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
 
     image_size = image_side ** 2
 
-    for ordinal_number in ordinal_numbers:
+    for index, ordinal_number in enumerate(ordinal_numbers):
         if ordinal_number > (2 ** image_size - 1):
             click.echo(
                 'Error: The ordinal number for side {}'
@@ -157,10 +157,10 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
         universe_iteration = assign_colour(universe_iteration, number_grid)
 
         save_path = Path(__file__).resolve().parent
-        save_path = save_path / 'Img.png'
+        save_path = save_path / 'Img{}.png'.format(index)
 
         universe_iteration.save(save_path, 'PNG')
-        print('Created universe iteration as ./Img.png')
+        print('Created universe iteration as ./Img{}.png'.format(index))
 
 
 if __name__ == '__main__':
