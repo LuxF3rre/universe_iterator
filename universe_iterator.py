@@ -16,6 +16,7 @@ Example:
 
 Todo:
     * Update usage.
+    * Find a way to give filenames to all images.
 
 .. _Google Python Style Guide:
    http://google.github.io/styleguide/pyguide.html
@@ -153,13 +154,10 @@ def main(image_side: int, ordinal_number: int) -> None:
     universe_iteration = Image.new('RGB', (image_side, image_side), "black")
     universe_iteration = assign_colour(universe_iteration, number_grid)
 
-    working_dir = Path(__file__).resolve().parent
+    save_path = Path(__file__).resolve().parent
+    save_path = save_path / 'Img.png'
 
-    universe_iteration.save(
-        '{}\\{}.png'.format(
-            working_dir,
-            ordinal_number),
-        'PNG')
+    universe_iteration.save(save_path, 'PNG')
 
 
 if __name__ == '__main__':
