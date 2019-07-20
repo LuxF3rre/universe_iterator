@@ -1,4 +1,4 @@
-# universe_iterator - creates every possible black and white image
+# universe_iterator
 
 This script generates every possible black and white image. Everything is represented among these images - your facebook photo, Avatar movie (as frames), the Bible, or even the picture of the very moment you read this description.
 
@@ -23,8 +23,7 @@ Options:
                                  >= 1  [default: 100]
   -o, --ordinal_numbers INTEGER  ordinal numbers of variation of the image >=
                                  0  [required]
-  --help                         Show this message and exit.
-`
+  --help                         Show this message and exit.`
 
 ## Example result
 
