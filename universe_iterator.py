@@ -143,7 +143,7 @@ def main(image_side: int, ordinal_number: int) -> None:
         click.echo(
             'Error: The ordinal number for side {}'
             'cannot be larger than {}'.format(
-                image_side, '{:.0e}'.format((2 ** image_size - 1))))
+                image_side, '{:.2e}'.format((2 ** image_size - 1))))
         sys.exit()
 
     # Create the image and save it.
