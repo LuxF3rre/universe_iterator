@@ -24,7 +24,9 @@ Options:
                                  
   -o, --ordinal_numbers INTEGER  ordinal numbers of variation of the image >= 0  [required]
                                  
-  --help                         Show this message and exit.```
+  --help                         Show this message and exit.
+
+```
 
 ## Example result
 
