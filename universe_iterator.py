@@ -110,22 +110,29 @@ def assign_colour(image: Image, number_grid: np.array) -> Image:
     '--image_side',
     default=100,
     show_default=True,
-    required=True,
     type=int,
     help='the length of the side of the image')
 @click.option(
     '-o',
-    '--ordinal_number',
+    '--ordinal_numbers',
     required=True,
     multiple=True,
     type=int,
-    help='ordinal number of variation of the image')
-def main(image_side: int, ordinal_number: int) -> None:
-    """Create iteration of an image.
+    help='ordinal numbers of variation of the image')
+def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
+    """universe_iterator creates every possible black and white image.
+
+    Everything is represented among these images - your facebook photo,
+    the Avatar movie (as frames), the Bible, or even the picture
+    of the very moment you read his description.
+
+    Using default values, there is about 2^1000 possible images. Some of them
+    are just rotations of one another. Therefore, we can roughly estimate
+    that there are about (2^1000) / 4 unique images.
 
     Args:
         image_side: desired length of side in pixels.
-        ordinal_number: ordinal number of desired variation of an image.
+        ordinal_numbers: ordinal number of desired variation of an image.
 
     Returns:
         Nothing.
@@ -139,25 +146,28 @@ def main(image_side: int, ordinal_number: int) -> None:
 
     image_size = image_side ** 2
 
-    if ordinal_number > (2 ** image_size - 1):
-        click.echo(
-            'Error: The ordinal number for side {}'
-            'cannot be larger than {}'.format(
-                image_side, '{:.2e}'.format((2 ** image_size - 1))))
-        sys.exit()
+    for ordinal_number in ordinal_numbers:
+        if ordinal_number > (2 ** image_size - 1):
+            click.echo(
+                'Error: The ordinal number for side {}'
+                'cannot be larger than {}'.format(
+                    image_side, '{:.2e}'.format((2 ** image_size - 1))))
+            sys.exit()
 
-    # Create the image and save it.
+        # Create the image and save it.
 
-    number_list = create_digits_list(ordinal_number, image_size)
-    number_grid = number_list.reshape(image_side, image_side)
+        number_list = create_digits_list(ordinal_number, image_size)
+        number_grid = number_list.reshape(image_side, image_side)
 
-    universe_iteration = Image.new('RGB', (image_side, image_side), "black")
-    universe_iteration = assign_colour(universe_iteration, number_grid)
+        universe_iteration = Image.new(
+            'RGB', (image_side, image_side), "black")
+        universe_iteration = assign_colour(universe_iteration, number_grid)
 
-    save_path = Path(__file__).resolve().parent
-    save_path = save_path / 'Img.png'
+        save_path = Path(__file__).resolve().parent
+        save_path = save_path / 'Img.png'
 
-    universe_iteration.save(save_path, 'PNG')
+        universe_iteration.save(save_path, 'PNG')
+        print('Created universe iteration as ./Img.png')
 
 
 if __name__ == '__main__':
