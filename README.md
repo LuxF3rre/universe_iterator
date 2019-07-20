@@ -10,7 +10,7 @@ Using default values, there is about 2^1000 possible images. Some of them are ju
 - numpy 1.9.3
 - Pillow 6.1.0
 
-To install required modules run 'pip3 install -r requirements.txt' in project directory.
+To install required modules run `pip3 install -r requirements.txt` in project directory.
 
 ## Usage
 
