@@ -16,13 +16,14 @@ To install required modules run `pip3 install -r requirements.txt` in project di
 
 `Usage: universe_iterator.py [OPTIONS]
 
-  universe_iterator creates every possible black and white image.
+universe_iterator creates every possible black and white image.
 
 Options:
-  -i, --image_side INTEGER       the length of the side of the image in pixels
-                                 >= 1  [default: 100]
-  -o, --ordinal_numbers INTEGER  ordinal numbers of variation of the image >=
-                                 0  [required]
+
+  -i, --image_side INTEGER       the length of the side of the image in pixels >= 1  [default: 100]
+                                 
+  -o, --ordinal_numbers INTEGER  ordinal numbers of variation of the image >= 0  [required]
+                                 
   --help                         Show this message and exit.`
 
 ## Example result
