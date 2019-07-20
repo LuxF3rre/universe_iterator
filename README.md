@@ -31,4 +31,4 @@ Options:
 
 ## Example result
 
-![Example result]()
+![Example result](sample.png)
