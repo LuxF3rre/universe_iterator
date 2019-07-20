@@ -130,13 +130,6 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
     are just rotations of one another. Therefore, we can roughly estimate
     that there are about (2^1000) / 4 unique images.
 
-    Args:
-        image_side: desired length of side in pixels.
-        ordinal_numbers: ordinal number of desired variation of an image.
-
-    Returns:
-        Nothing.
-
     """
     # Check if passed options are correct or sane.
 
