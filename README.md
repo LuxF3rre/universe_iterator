@@ -14,7 +14,7 @@ To install required modules run `pip3 install -r requirements.txt` in project di
 
 ## Usage
 
-`Usage: universe_iterator.py [OPTIONS]
+```Usage: universe_iterator.py [OPTIONS]
 
 universe_iterator creates every possible black and white image.
 
@@ -24,7 +24,7 @@ Options:
                                  
   -o, --ordinal_numbers INTEGER  ordinal numbers of variation of the image >= 0  [required]
                                  
-  --help                         Show this message and exit.`
+  --help                         Show this message and exit.```
 
 ## Example result
 
