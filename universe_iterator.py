@@ -34,17 +34,17 @@ import click
 import numpy as np
 
 
-def dec_to_bin(dec_number: int) -> str:
+def dec_to_bin(dec_number: int) -> int:
     """Transform a decimal number into a binary number.
 
     Args:
         dec_number: Decimal number to be translated into binary one.
 
     Returns:
-        A binary number as a string.
+        A binary number.
 
     """
-    return bin(dec_number)[2:]
+    return bin(dec_number)
 
 
 def create_digits_list(ordinal_number: int, image_size: int) -> np.array:
@@ -62,7 +62,7 @@ def create_digits_list(ordinal_number: int, image_size: int) -> np.array:
 
     """
     number = dec_to_bin(ordinal_number)
-    digits_list = list(map(int, number))  # rewrite str to a list[int]
+    digits_list = list(map(int, number[2:]))  # rewrite str to a list[int]
     to_be_filled = image_size - len(digits_list)
     number_list = np.concatenate(
         [np.array(digits_list), np.zeros(to_be_filled, dtype=int)])
@@ -140,6 +140,11 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
         click.echo("Error: The image's side must be at least 1 px.")
         sys.exit()
 
+    if len(ordinal_numbers) > 1000:
+        click.echo('Error: You cannot create more than 1 000'
+                   'iterations at once.')
+        sys.exit()
+
     image_size = image_side ** 2
 
     for index, ordinal_number in enumerate(ordinal_numbers):
@@ -159,14 +164,14 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
         number_grid = number_list.reshape(image_side, image_side)
 
         universe_iteration = Image.new(
-            'RGB', (image_side, image_side), "black")
+            'RGB', (image_side, image_side), 'black')
         universe_iteration = assign_colour(universe_iteration, number_grid)
 
         save_path = Path(__file__).resolve().parent
-        save_path = save_path / 'Img{}.png'.format(index)
+        save_path = save_path / 'output{}.png'.format(index)
 
         universe_iteration.save(save_path, 'PNG')
-        print('Created universe iteration as ./Img{}.png'.format(index))
+        print('Created universe iteration as ./output{}.png'.format(index))
 
 
 if __name__ == '__main__':
