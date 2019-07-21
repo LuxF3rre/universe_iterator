@@ -12,11 +12,7 @@ are just rotations of one another. Therefore, we can roughly estimate
 that there are about (2^1000) / 4 unique images.
 
 Example:
-    $ python universe_iterator.py -o 2137
-
-Todo:
-    * Update usage.
-    * Find a way to give filenames to all images.
+    $ python universe_iterator.py 2137
 
 .. _Google Python Style Guide:
    http://google.github.io/styleguide/pyguide.html
@@ -138,7 +134,7 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
     for index, ordinal_number in enumerate(ordinal_numbers):
         if not 0 <= ordinal_number <= (2 ** image_size - 1):
             click.echo(
-                'Error: The ordinal number for side {}'
+                'Error: The ordinal number for side {} '
                 'must be at least 0 and cannot be larger than {}'.format(
                     image_side, '{:.2e}'.format((2 ** image_size - 1))))
             sys.exit()
@@ -155,8 +151,8 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
         save_path = Path(__file__).resolve().parent
         save_path = save_path / 'output{}.png'.format(index)
 
-        universe_iteration.save(save_path, 'PNG')
-        print('Created universe iteration as ./output{}.png'.format(index))
+        universe_iteration.save(save_path, 'BMP')
+        print('Created universe iteration as ./output{}.bmp'.format(index))
 
 
 if __name__ == '__main__':
