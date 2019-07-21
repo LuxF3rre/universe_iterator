@@ -12,7 +12,7 @@ are just rotations of one another. Therefore, we can roughly estimate
 that there are about (2^1000) / 4 unique images.
 
 Example:
-    $ python universe_iterator.py
+    $ python universe_iterator.py -o 2137
 
 Todo:
     * Update usage.
@@ -133,11 +133,8 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
     """
     # Check if passed options are correct or sane.
 
-    if image_side > 1000:
-        click.echo("Error: The image's side cannot be larger than 1 000 px.")
-        sys.exit()
-    elif image_side <= 0:
-        click.echo("Error: The image's side must be at least 1 px.")
+    if not 0 < image_side <= 1000:
+        click.echo("Error: The image's side must be between 1 and 1 000 px.")
         sys.exit()
 
     if len(ordinal_numbers) > 1000:
@@ -148,14 +145,11 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
     image_size = image_side ** 2
 
     for index, ordinal_number in enumerate(ordinal_numbers):
-        if ordinal_number > (2 ** image_size - 1):
+        if not 0 <= ordinal_number <= (2 ** image_size - 1):
             click.echo(
                 'Error: The ordinal number for side {}'
-                'cannot be larger than {}'.format(
+                'must be at least 0 and cannot be larger than {}'.format(
                     image_side, '{:.2e}'.format((2 ** image_size - 1))))
-            sys.exit()
-        elif ordinal_number < 0:
-            click.echo('Error: The ordinal number must be at least 0.')
             sys.exit()
 
         # Create the image and save it.
