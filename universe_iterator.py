@@ -111,14 +111,11 @@ def assign_colour(image: Image, number_grid: np.array) -> Image:
     default=100,
     show_default=True,
     type=int,
-    help='the length of the side of the image in pixels >= 1')
-@click.option(
-    '-o',
-    '--ordinal_numbers',
-    required=True,
-    multiple=True,
-    type=int,
-    help='ordinal numbers of variation of the image >= 0')
+    help='the length of the side of the image in pixels')
+@click.argument(
+    'ordinal_numbers',
+    nargs=-1,
+    type=int)
 def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
     """universe_iterator creates every possible black and white image.
 
@@ -126,20 +123,14 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
     the Avatar movie (as frames), the Bible, or even the picture
     of the very moment you read his description.
 
-    Using default values, there is about 2^1000 possible images. Some of them
-    are just rotations of one another. Therefore, we can roughly estimate
-    that there are about (2^1000) / 4 unique images.
+    For ORDINAL_NUMBERS specify ordinal numbers of variations
+    of the images you want to create.
 
     """
     # Check if passed options are correct or sane.
 
     if not 0 < image_side <= 1000:
         click.echo("Error: The image's side must be between 1 and 1 000 px.")
-        sys.exit()
-
-    if len(ordinal_numbers) > 1000:
-        click.echo('Error: You cannot create more than 1 000'
-                   'iterations at once.')
         sys.exit()
 
     image_size = image_side ** 2
