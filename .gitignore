@@ -3,3 +3,6 @@
 .pyre
 monkeytype.sqlite3
 output*.bmp
+build
+dist
+*.spec
