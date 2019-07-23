@@ -12,7 +12,7 @@ are just rotations of one another. Therefore, we can roughly estimate
 that there are about (2^1000) / 4 unique images.
 
 Example:
-    $ python universe_iterator.py 2137
+    $ python universe_iterator.py 2137 314 512
 
 .. _Google Python Style Guide:
    http://google.github.io/styleguide/pyguide.html
@@ -23,9 +23,9 @@ import sys
 from pathlib import Path
 from typing import Tuple
 
-from PIL import Image
-
 import click
+
+from PIL import Image
 
 import numpy as np
 
