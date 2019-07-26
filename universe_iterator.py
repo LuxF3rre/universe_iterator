@@ -62,7 +62,7 @@ def create_digits_list(ordinal_number: int, image_size: int) -> np.array:
     digits_list = list([int(x) for x in number[2:]])
     to_be_filled = image_size - len(digits_list)
     number_list = np.concatenate(
-        [np.array(digits_list), np.zeros(to_be_filled, dtype=int)])
+        [np.zeros(to_be_filled, dtype=int)], np.array(digits_list))
     return number_list
 
 
