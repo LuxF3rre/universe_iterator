@@ -76,9 +76,9 @@ def number_to_colour(digit_in_grid: int) -> Tuple[int, int, int]:
         A tuple that holds the colour in RGB.
 
     """
-    if digit_in_grid == 0:
-        return (0, 0, 0)
-    return (255, 255, 255)
+    if digit_in_grid:
+        return (255, 255, 255)
+    return (0, 0, 0)
 
 
 def assign_colour(image: Image, number_grid: np.array) -> Image:
