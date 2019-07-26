@@ -30,19 +30,6 @@ from PIL import Image
 import numpy as np
 
 
-def dec_to_bin(dec_number: int) -> int:
-    """Transform a decimal number into a binary number.
-
-    Args:
-        dec_number: Decimal number to be translated into binary one.
-
-    Returns:
-        A binary number.
-
-    """
-    return bin(dec_number)
-
-
 def create_digits_list(ordinal_number: int, image_size: int) -> np.array:
     """Create a digits list of an image variation from ordinal number.
 
@@ -57,7 +44,7 @@ def create_digits_list(ordinal_number: int, image_size: int) -> np.array:
         A one dimensional np.array that represent pixels in the image.
 
     """
-    number = dec_to_bin(ordinal_number)
+    number = bin(ordinal_number)
     # rewrite number to a list of ints
     digits_list = list([int(x) for x in number[2:]])
     to_be_filled = image_size - len(digits_list)
