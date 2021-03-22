@@ -6,3 +6,5 @@ output*.bmp
 build
 dist
 *.spec
+.venv
+poetry.lock

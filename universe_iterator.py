@@ -54,7 +54,7 @@ def create_digits_list(ordinal_number: int, image_size: int) -> np.array:
 
 
 def number_to_colour(digit_in_grid: int) -> Tuple[int, int, int]:
-    """Return colour for given number.
+    """Return colour for a given number.
 
     Args:
         digit_in_grid: A digit in number grid that will represent a pixel.
