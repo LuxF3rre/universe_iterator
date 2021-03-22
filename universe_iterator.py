@@ -120,11 +120,11 @@ def main(image_side: int, ordinal_numbers: Tuple[int]) -> None:
     image_size = image_side ** 2
 
     for index, ordinal_number in enumerate(ordinal_numbers):
-        if not 0 <= ordinal_number <= (2 ** image_size - 1):
+        if not 0 <= ordinal_number <= max_number := (2 ** image_size - 1):
             click.echo(
                 'Error: The ordinal number for side {} '
                 'must be at least 0 and cannot be larger than {}'.format(
-                    image_side, '{:.2e}'.format((2 ** image_size - 1))))
+                    image_side, '{:.2e}'.format(max_number)))
             sys.exit()
 
         # Create the image and save it.
